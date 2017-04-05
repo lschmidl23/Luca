@@ -6,7 +6,7 @@ load ('GV.mat');
 load ('MK.mat');
 
 kvec = MK(:,7);
-pvec = 1:1:10;
+pvec = 1:1:5;
 
 ChiKP = [];
 
@@ -14,16 +14,18 @@ for ii = 1 : length(pvec)
     for jj = 400:500%1 : length(kvec)
         
         p = pvec(ii);
-        k = kvec(jj);    
+        k = kvec(jj);
+        x = linspace(0.001,0.999);
         f = @(x) Kpfunc(x,p);
         g = @(x) f(x) - k;                       
         chi_zero = 0.9;
-        chi_star = fzero(g, chi_zero)   
+        chi_star = fzero(g, chi_zero);   
         ChiKP(ii,jj) = chi_star;
-        disp(ii);disp(jj);
+        disp(ii),disp(jj),disp(chi_star);
     end
 end
 
+disp (ChiKP);
 disp (ChiKP);
 
 
